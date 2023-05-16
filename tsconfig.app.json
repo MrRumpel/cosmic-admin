@@ -16,6 +16,7 @@
         "./src/*"
       ]
     },
+    "moduleResolution": "node",
     "types": [
       "element-plus/global"
     ],
