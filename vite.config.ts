@@ -12,12 +12,6 @@ export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
-    AutoImport({
-      resolvers: [ElementPlusResolver()],
-    }),
-    Components({
-      resolvers: [ElementPlusResolver()],
-    }),
   ],
   css: {
     preprocessorOptions: {
