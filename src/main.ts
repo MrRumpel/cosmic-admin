@@ -1,8 +1,7 @@
 import './assets/main.css';
-import { createApp, createSSRApp } from 'vue';
-import { createPinia } from 'pinia';
+import { createSSRApp } from 'vue';
 
-import App from './App.vue';
+import App from './App';
 import appRoutingModule from './app-routing.module';
 
 const main = async () => {
