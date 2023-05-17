@@ -1,7 +1,7 @@
 import { defineComponent, ref } from 'vue';
 import { RouterView } from 'vue-router';
 import { ElConfigProvider } from 'element-plus';
-import { AppProvider } from './components/core';
+import { AppProvider } from './core/provider';
 
 export default defineComponent({
   name: 'App',

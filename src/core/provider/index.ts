@@ -1,4 +1,4 @@
-import { withInstall } from '@/utils';
+import { withInstall } from '@/core/utils';
 import appProvider from './AppProvider';
 
 export const AppProvider = withInstall(appProvider);
