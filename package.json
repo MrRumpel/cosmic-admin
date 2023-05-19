@@ -17,6 +17,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "crypto-js": "^4.1.1",
     "element-plus": "^2.3.4",
     "pinia": "^2.0.35",
     "vue": "^3.2.47",

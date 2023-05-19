@@ -3,7 +3,6 @@ import { AppRouteModule, AppRouteRecordRaw } from '../types';
 import { REDIRECT_ROUTE, PAGE_NOT_FOUND_ROUTE } from './basic';
 import { mainOutRoutes } from './mainOut';
 
-// import.meta.globEager() 直接引入所有的模块 Vite 独有的功能
 const modules = import.meta.glob('./modules/**/*.ts', { eager: true });
 const routeModuleList: AppRouteModule[] = [];
 
