@@ -7,6 +7,11 @@ import { useI18n } from '@/core/hooks/web/useI18n';
 import { PermissionModeEnum } from '@/core/enums/appEnum';
 import { filter } from '@/core/utils/helper/treeHelper';
 import { asyncRoutes } from '@/core/router/routes';
+import { ERROR_LOG_ROUTE, PAGE_NOT_FOUND_ROUTE } from '@/core/router/routes/basic';
+import { store } from '..';
+import { flatMultiLevelRoutes, transformObjToRoute } from '@/core/router/helper/routeHelper';
+import { transformRouteToMenu } from '@/core/router/helper/menuHelper';
+import projectSetting from '@/core/config/projectSetting';
 
 interface PermissionState {
   // Permission code list
