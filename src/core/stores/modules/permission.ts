@@ -12,6 +12,7 @@ import { store } from '..';
 import { flatMultiLevelRoutes, transformObjToRoute } from '@/core/router/helper/routeHelper';
 import { transformRouteToMenu } from '@/core/router/helper/menuHelper';
 import projectSetting from '@/core/config/projectSetting';
+import { PageEnum } from '@/core/enums/pageEnum';
 
 interface PermissionState {
   // Permission code list
@@ -93,8 +94,8 @@ export const usePermissionStore = defineStore({
       this.lastBuildMenuTime = 0;
     },
     async changePermissionCode() {
-      const codeList = await getPermCode();
-      this.setPermCodeList(codeList);
+      // const codeList = await getPermCode();
+      // this.setPermCodeList(codeList);
     },
 
     // 构建路由
@@ -170,7 +171,7 @@ export const usePermissionStore = defineStore({
           break;
 
         // 路由映射， 默认进入该case
-        case PermissionModeEnum.ROUTE_MAPPING:
+        case PermissionModeEnum.ROUTE_MAPPING: {
           // 对非一级路由进行过滤
           routes = filter(asyncRoutes, routeFilter);
           // 对一级路由再次根据角色权限过滤
@@ -185,54 +186,53 @@ export const usePermissionStore = defineStore({
           menuList.sort((a, b) => {
             return (a.meta?.orderNo || 0) - (b.meta?.orderNo || 0);
           });
-
           // 设置菜单列表
           this.setFrontMenuList(menuList);
-
           // Convert multi-level routing to level 2 routing
           // 将多级路由转换为 2 级路由
           routes = flatMultiLevelRoutes(routes);
           break;
+        }
 
         //  If you are sure that you do not need to do background dynamic permissions, please comment the entire judgment below
         //  如果确定不需要做后台动态权限，请在下方注释整个判断
-        case PermissionModeEnum.BACK:
-          const { createMessage } = useMessage();
+        // case PermissionModeEnum.BACK:
+        //   const { createMessage } = useMessage();
 
-          createMessage.loading({
-            content: t('sys.app.menuLoading'),
-            duration: 1,
-          });
+        //   createMessage.loading({
+        //     content: t('sys.app.menuLoading'),
+        //     duration: 1,
+        //   });
 
-          // !Simulate to obtain permission codes from the background,
-          // 模拟从后台获取权限码，
-          // this function may only need to be executed once, and the actual project can be put at the right time by itself
-          // 这个功能可能只需要执行一次，实际项目可以自己放在合适的时间
-          let routeList: AppRouteRecordRaw[] = [];
-          try {
-            await this.changePermissionCode();
-            routeList = (await getMenuList()) as AppRouteRecordRaw[];
-          } catch (error) {
-            console.error(error);
-          }
+        //   // !Simulate to obtain permission codes from the background,
+        //   // 模拟从后台获取权限码，
+        //   // this function may only need to be executed once, and the actual project can be put at the right time by itself
+        //   // 这个功能可能只需要执行一次，实际项目可以自己放在合适的时间
+        //   let routeList: AppRouteRecordRaw[] = [];
+        //   try {
+        //     await this.changePermissionCode();
+        //     routeList = (await getMenuList()) as AppRouteRecordRaw[];
+        //   } catch (error) {
+        //     console.error(error);
+        //   }
 
-          // Dynamically introduce components
-          // 动态引入组件
-          routeList = transformObjToRoute(routeList);
+        //   // Dynamically introduce components
+        //   // 动态引入组件
+        //   routeList = transformObjToRoute(routeList);
 
-          //  Background routing to menu structure
-          //  后台路由到菜单结构
-          const backMenuList = transformRouteToMenu(routeList);
-          this.setBackMenuList(backMenuList);
+        //   //  Background routing to menu structure
+        //   //  后台路由到菜单结构
+        //   const backMenuList = transformRouteToMenu(routeList);
+        //   this.setBackMenuList(backMenuList);
 
-          // remove meta.ignoreRoute item
-          // 删除 meta.ignoreRoute 项
-          routeList = filter(routeList, routeRemoveIgnoreFilter);
-          routeList = routeList.filter(routeRemoveIgnoreFilter);
+        //   // remove meta.ignoreRoute item
+        //   // 删除 meta.ignoreRoute 项
+        //   routeList = filter(routeList, routeRemoveIgnoreFilter);
+        //   routeList = routeList.filter(routeRemoveIgnoreFilter);
 
-          routeList = flatMultiLevelRoutes(routeList);
-          routes = [PAGE_NOT_FOUND_ROUTE, ...routeList];
-          break;
+        //   routeList = flatMultiLevelRoutes(routeList);
+        //   routes = [PAGE_NOT_FOUND_ROUTE, ...routeList];
+        //   break;
       }
 
       routes.push(ERROR_LOG_ROUTE);
