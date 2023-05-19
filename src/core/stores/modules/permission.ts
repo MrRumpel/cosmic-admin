@@ -1,28 +1,12 @@
-import type { AppRouteRecordRaw, Menu } from '/@/router/types';
-
 import { defineStore } from 'pinia';
-import { store } from '/@/store';
-import { useI18n } from '/@/hooks/web/useI18n';
 import { useUserStore } from './user';
 import { useAppStoreWithOut } from './app';
 import { toRaw } from 'vue';
-import { transformObjToRoute, flatMultiLevelRoutes } from '/@/router/helper/routeHelper';
-import { transformRouteToMenu } from '/@/router/helper/menuHelper';
-
-import projectSetting from '/@/settings/projectSetting';
-
-import { PermissionModeEnum } from '/@/enums/appEnum';
-
-import { asyncRoutes } from '/@/router/routes';
-import { ERROR_LOG_ROUTE, PAGE_NOT_FOUND_ROUTE } from '/@/router/routes/basic';
-
-import { filter } from '/@/utils/helper/treeHelper';
-
-import { getMenuList } from '/@/api/sys/menu';
-import { getPermCode } from '/@/api/sys/user';
-
-import { useMessage } from '/@/hooks/web/useMessage';
-import { PageEnum } from '/@/enums/pageEnum';
+import { AppRouteRecordRaw, Menu } from '@/core/router/types';
+import { useI18n } from '@/core/hooks/web/useI18n';
+import { PermissionModeEnum } from '@/core/enums/appEnum';
+import { filter } from '@/core/utils/helper/treeHelper';
+import { asyncRoutes } from '@/core/router/routes';
 
 interface PermissionState {
   // Permission code list
