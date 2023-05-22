@@ -1,5 +1,7 @@
+import { ResultEnum } from '../core/enums/httpEnum';
+import { Recordable } from 'vite-plugin-mock';
 // Interface data format used to return a unified format
-import { ResultEnum } from '/@/enums/httpEnum';
+
 
 export function resultSuccess<T = Recordable>(result: T, { message = 'ok' } = {}) {
   return {
