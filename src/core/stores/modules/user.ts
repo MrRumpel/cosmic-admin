@@ -1,21 +1,21 @@
-import type { UserInfo } from '/#/store';
-import type { ErrorMessageMode } from '/#/axios';
+import { GetUserInfoModel, LoginParams } from '@/core/api/sys/model/userModel';
+import { doLogout, getUserInfo, loginApi } from '@/core/api/sys/user';
+import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from '@/core/enums/cacheEnum';
+import { PageEnum } from '@/core/enums/pageEnum';
+import { RoleEnum } from '@/core/enums/roleEnum';
+import { useI18n } from '@/core/hooks/web/useI18n';
+import { useMessage } from '@/core/hooks/web/useMessage';
+import { router } from '@/core/router';
+import { PAGE_NOT_FOUND_ROUTE } from '@/core/router/routes/basic';
+import { getAuthCache, setAuthCache } from '@/core/utils/auth';
+import { isArray } from '@/core/utils/is';
+import { ErrorMessageMode } from '@/types/axios';
+import { UserInfo } from '@/types/store';
 import { defineStore } from 'pinia';
-import { store } from '/@/store';
-import { RoleEnum } from '/@/enums/roleEnum';
-import { PageEnum } from '/@/enums/pageEnum';
-import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from '/@/enums/cacheEnum';
-import { getAuthCache, setAuthCache } from '/@/utils/auth';
-import { GetUserInfoModel, LoginParams } from '/@/api/sys/model/userModel';
-import { doLogout, getUserInfo, loginApi } from '/@/api/sys/user';
-import { useI18n } from '/@/hooks/web/useI18n';
-import { useMessage } from '/@/hooks/web/useMessage';
-import { router } from '/@/router';
-import { usePermissionStore } from '/@/store/modules/permission';
-import { RouteRecordRaw } from 'vue-router';
-import { PAGE_NOT_FOUND_ROUTE } from '/@/router/routes/basic';
-import { isArray } from '/@/utils/is';
 import { h } from 'vue';
+import { RouteRecordRaw } from 'vue-router';
+import { store } from '..';
+import { usePermissionStore } from './permission';
 
 interface UserState {
   userInfo: Nullable<UserInfo>;
