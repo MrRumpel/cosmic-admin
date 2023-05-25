@@ -6,7 +6,7 @@ import { AppRouteModule, AppRouteRecordRaw } from '../types';
 import { warn } from '@/core/utils/log';
 
 export type LayoutMapKey = 'LAYOUT';
-const IFRAME = () => import('/@/views/sys/iframe/FrameBlank.vue');
+const IFRAME = () => import('@/pages/sys/iframe/FrameBlank');
 
 const LayoutMap = new Map<string, () => Promise<typeof import('*.vue')>>();
 
@@ -17,7 +17,7 @@ let dynamicViewsModules: Record<string, () => Promise<Recordable>>;
 
 // Dynamic introduction
 function asyncImportRoute(routes: AppRouteRecordRaw[] | undefined) {
-  dynamicViewsModules = dynamicViewsModules || import.meta.glob('../../views/**/*.{vue,tsx}');
+  dynamicViewsModules = dynamicViewsModules || import.meta.glob('../../../pages/**/*.{vue,tsx}');
   if (!routes) return;
   routes.forEach((item) => {
     if (!item.component && item.meta?.frameSrc) {
@@ -45,7 +45,7 @@ function dynamicImport(
 ) {
   const keys = Object.keys(dynamicViewsModules);
   const matchKeys = keys.filter((key) => {
-    const k = key.replace('../../views', '');
+    const k = key.replace('../../pages', '');
     const startFlag = component.startsWith('/');
     const endFlag = component.endsWith('.vue') || component.endsWith('.tsx');
     const startIndex = startFlag ? 0 : 1;
@@ -61,7 +61,7 @@ function dynamicImport(
     );
     return;
   } else {
-    warn('在src/views/下找不到`' + component + '.vue` 或 `' + component + '.tsx`, 请自行创建!');
+    warn('在src/pages/下找不到`' + component + '.vue` 或 `' + component + '.tsx`, 请自行创建!');
     return EXCEPTION_COMPONENT;
   }
 }

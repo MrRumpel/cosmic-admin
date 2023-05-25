@@ -1,13 +1,8 @@
 /**
  * Data processing class, can be configured according to the project
  */
-import type {
-  AxiosInstance,
-  AxiosRequestConfig,
-  AxiosResponse,
-  InternalAxiosRequestConfig
-} from 'axios';
-import type { RequestOptions, Result } from '/#/axios';
+import { RequestOptions, Result } from '@/types/axios';
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 export interface CreateAxiosOptions extends AxiosRequestConfig {
   authenticationScheme?: string;
@@ -35,10 +30,7 @@ export abstract class AxiosTransform {
   /**
    * @description: 请求之前的拦截器
    */
-  requestInterceptors?: (
-    config: InternalAxiosRequestConfig,
-    options: CreateAxiosOptions,
-  ) => InternalAxiosRequestConfig;
+  requestInterceptors?: (config: AxiosRequestConfig, options: CreateAxiosOptions) => AxiosRequestConfig;
 
   /**
    * @description: 请求之后的拦截器
@@ -53,5 +45,5 @@ export abstract class AxiosTransform {
   /**
    * @description: 请求之后的拦截器错误处理
    */
-  responseInterceptorsCatch?: (axiosInstance: AxiosInstance, error: Error) => void;
+  responseInterceptorsCatch?: (axiosInstance: AxiosInstance, error: any) => Promise<any>;
 }

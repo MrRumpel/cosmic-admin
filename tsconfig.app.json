@@ -12,9 +12,12 @@
     "composite": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"],
+      "/#/*": ["./src/types/*"],
+      "/@/store/*":["./src/core/stores/*"],
+      "/@/settings/*":["./src/core/config/*"],
+      "/@/enums/*":["./src/core/enums/*"],
+      "/@/hooks/*":["./src/core/hooks/*"],
     },
     "moduleResolution": "node",
     "types": [

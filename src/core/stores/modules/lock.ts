@@ -1,9 +1,6 @@
-import type { LockInfo } from '/#/store';
-
+import { LOCK_INFO_KEY } from '@/core/enums/cacheEnum';
+import { Persistent } from '@/core/utils/cache/persistent';
 import { defineStore } from 'pinia';
-
-import { LOCK_INFO_KEY } from '/@/enums/cacheEnum';
-import { Persistent } from '/@/utils/cache/persistent';
 import { useUserStore } from './user';
 
 interface LockState {

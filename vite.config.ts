@@ -25,6 +25,11 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '/#/': fileURLToPath(new URL('./src/types/', import.meta.url)),
+      '/@/store/': fileURLToPath(new URL('./src/core/stores/', import.meta.url)),
+      '/@/settings/': fileURLToPath(new URL('./src/core/config/', import.meta.url)),
+      '/@/enums/': fileURLToPath(new URL('./src/core/enums/', import.meta.url)),
+      '/@/hooks/': fileURLToPath(new URL('./src/core/hooks/', import.meta.url)),
     },
   },
   server: {

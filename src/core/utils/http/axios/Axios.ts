@@ -1,18 +1,12 @@
-import type {
-  AxiosRequestConfig,
-  AxiosInstance,
-  AxiosResponse,
-  AxiosError,
-  InternalAxiosRequestConfig,
-} from 'axios';
-import type { RequestOptions, Result, UploadFileParams } from '/#/axios';
+import type { AxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 import type { CreateAxiosOptions } from './axiosTransform';
 import axios from 'axios';
 import qs from 'qs';
 import { AxiosCanceler } from './axiosCancel';
-import { isFunction } from '/@/utils/is';
 import { cloneDeep } from 'lodash-es';
-import { ContentTypeEnum, RequestEnum } from '/@/enums/httpEnum';
+import { RequestOptions, Result, UploadFileParams } from '@/types/axios';
+import { isFunction } from '../../is';
+import { ContentTypeEnum, RequestEnum } from '@/core/enums/httpEnum';
 
 export * from './axiosTransform';
 
@@ -77,17 +71,13 @@ export class VAxios {
     if (!transform) {
       return;
     }
-    const {
-      requestInterceptors,
-      requestInterceptorsCatch,
-      responseInterceptors,
-      responseInterceptorsCatch,
-    } = transform;
+    const { requestInterceptors, requestInterceptorsCatch, responseInterceptors, responseInterceptorsCatch } =
+      transform;
 
     const axiosCanceler = new AxiosCanceler();
 
     // Request interceptor configuration processing
-    this.axiosInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+    this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
       // If cancel repeat request is turned on, then cancel repeat request is prohibited
       const { requestOptions } = this.options;
       const ignoreCancelToken = requestOptions?.ignoreCancelToken ?? true;
