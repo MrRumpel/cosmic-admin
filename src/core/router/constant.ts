@@ -14,3 +14,5 @@ export const getParentLayout = (_name?: string) => {
       });
     });
 };
+
+export const EXCEPTION_COMPONENT = () => import('../layout/index');
